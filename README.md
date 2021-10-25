@@ -1,14 +1,8 @@
 ## Stock-Price-Forecasting
-CSCI2227 Term Project
+CSCI2227 Term Project - Cole Dumas, John Clark, and Steven Maniscalco 
 
-1. Number 1
-2. Number 2
+# About
+This software is intended to use technical analysis to predict stock prices based on historical performance while illustrating concepts from scientific computing.
 
-
-
-Steve message
-=======
-Test Comment
-blah blah blah
-
-asfhaf
+# Required MATLAB Packages:
+- Financial Toolbox
