@@ -10,5 +10,6 @@ aes(:,1) = x2mdate(aes(:,1));
 mer = xlsread('MER');
 mer(:,1) = x2mdate(mer(:,1));
 
+
 aal = xlsread('AAL');
-aal(:,1) = x2mdate(aal(:,1));
+aal(:,1) = x2mdate(aal(:,1))
