@@ -10,7 +10,7 @@ pfeDate = pfe(:,1);
 pfePrice = pfe(:,2);
 [maximaPfe, maxIdxPfe, minimaPfe, minIdxPfe] = maxes_mins(pfePrice);
 pfeMaxDate = [];
-
+%{
 for i = (1:length(maxIdxPfe))
     pfeMaxDate(i) = pfeDate(maxIdxPfe(i));
 end
@@ -18,6 +18,10 @@ pfeMinDate = [];
 for i = (1:length(minIdxPfe))
     pfeMinDate(i) = pfeDate(minIdxPfe(i));
 end
+%}
+pfeMin
+pfeMaxDate = pfeDate(1:(end-1));
+pfeMinDate = pfeDate(1:end-1);
 
 merDate = mer(:,1);
 merPrice = mer(:,2);
@@ -59,12 +63,11 @@ end
 %% Setting up Moving Averages
 %15 pt. movinge means
 
-k1 = 10;
-k2 = 20; %pfe has approx double the data points as the others
-pfeMovingAvg = movmean(pfePrice,k2);
-merMovingAvg = movmean(merPrice,k1);
-aesMovingAvg = movmean(aesPrice,k1);
-aalMovingAvg = movmean(aalPrice,k1);
+k =15;
+pfeMovingAvg = movmean(pfePrice,k);
+merMovingAvg = movmean(merPrice,k);
+aesMovingAvg = movmean(aesPrice,k);
+aalMovingAvg = movmean(aalPrice,k);
 
 
 
