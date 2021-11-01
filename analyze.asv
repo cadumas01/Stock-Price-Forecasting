@@ -10,9 +10,16 @@ function analyze(fileName)
     price = data(:,2);
     [maxima, maxIdx, minima, minIdx] = maxes_mins(price);
     
-    maxDate = alignByDate(date,maxIdx);
-    minDate = alignByDate(date,minIdx);
-   
+    maxDate = [];
+    for i = (1:length(maxIdx))
+        maxDate(i) = date(maxIdx(i));
+    end
+    
+    minDate = [];
+    for i = (1:length(minIdx))
+        minDate(i) = date(minIdx(i));
+    end
+
     %% Setting up Moving Averages
     %k pt. movinge means
 
@@ -32,7 +39,7 @@ function analyze(fileName)
 end
 
 %Aligns matrix m with Dates of m's parent matrix
-function mDates = alignByDate(date,mIdx)
+function mDates = alignWithDate(m,date,mIdx)
     len = length(mIdx);
     mDate = zeros(len);
     for i = (1:len)
