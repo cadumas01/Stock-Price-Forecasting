@@ -1,8 +1,9 @@
 %% Read in Data
 pfe = excelReader("PFE");
-mer = excelReader("MER"); % issue with mer data, dates overlap after price drops from 90
+mer = excelReader("MER"); % issue with mer data, dates overlap after price drops from 90 % I cut MERdata after the issue - Cole
 aes = excelReader("AES");
-aal = excelReader("AAL");
+%aal = excelReader("AAL"); % commented out temporarily;
+aal = ones(5,2);
 
 %% Calculate Mins and Maxes
 pfeDate = pfe(:,1);
