@@ -5,44 +5,38 @@ function analyze(fileName)
     %% Read in Data
     data = excelReader(fileName);
    
-    %% Calculate Mins and Maxes
+    %% Calculate Mins and Maxes of Price
     date = data(:,1);
     price = data(:,2);
-    [maxima, maxIdx, minima, minIdx] = maxes_mins(price);
+    [maxima, maxDate, minima, minDate] = maxes_mins(date, price);
+  
     
-    maxDate = [];
-    for i = (1:length(maxIdx))
-        maxDate(i) = date(maxIdx(i));
-    end
-    
-    minDate = [];
-    for i = (1:length(minIdx))
-        minDate(i) = date(minIdx(i));
-    end
-
-    %% Setting up Moving Averages
+    %% Calculate Moving Average
     %k pt. movinge means
 
-    k = fix(length(data)/25);    
-    movingAvg = movmean(price,k);
+    k = fix(length(data)/20);    
+    movAvg = movmean(price,k);
 
+    
+    %% Caluclate Mins and Max of Moving Avg
+    [maximaMovAvg, maxMovAvgDate, minimaMovAvg, minMovAvgDate] = maxes_mins(date,movAvg);
+    
     %% Plot Data
     figure
     plot(date,price)
     hold on
-    plot(maxDate,maxima,'og')
-    plot(minDate,minima,'or')
-    plot(date,movingAvg,'p')
+   % plot(maxDate,maxima,'og') % disabled low scale extrema for now
+    %plot(minDate,minima,'or') % disabled 
+    
+    plot(date,movAvg,'m')
+    
+    plot(maxMovAvgDate,maximaMovAvg,'^g')
+    reg1 = fitlm(maxMovAvgDate,maximaMovAvg)
+    
+    plot(minMovAvgDate,minimaMovAvg,'^r')
+    
     title(fileName)
     xlabel('Date')
     ylabel('Price')
 end
 
-%Aligns matrix m with Dates of m's parent matrix
-function mDates = alignWithDate(m,date,mIdx)
-    len = length(mIdx);
-    mDate = zeros(len);
-    for i = (1:len)
-        mDate(i) = date(mIdx(i));
-    end
-end
