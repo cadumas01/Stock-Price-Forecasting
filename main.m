@@ -57,7 +57,7 @@ for i = (1:length(minIdxAal))
 end
 
 %% Setting up Moving Averages
-%15 pt. movinge means
+%k pt. movinge means
 
 k1 = 10;
 k2 = 20; %pfe has approx double the data points as the others
