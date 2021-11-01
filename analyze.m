@@ -32,9 +32,9 @@ function analyze(fileName)
 end
 
 %Aligns matrix m with Dates of m's parent matrix
-function mDates = alignByDate(date,mIdx)
+function [mDate] = alignByDate(date,mIdx)
     len = length(mIdx);
-    mDate = zeros(len);
+    mDate = zeros(len,1);
     for i = (1:len)
         mDate(i) = date(mIdx(i));
     end
