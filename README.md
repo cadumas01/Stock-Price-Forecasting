@@ -5,10 +5,11 @@ CSCI2227 Term Project - Cole Dumas, John Clark, and Steven Maniscalco
 This software is intended to use technical analysis to predict stock prices based on historical performance while illustrating concepts from scientific computing.
 
 ## Usage 
-Visualize multiple data sets at once:
-  Call the script: ''' main2 '''
+Visualize multiple data sets at once:<br >
+- Call the script: ``` main2 ```
+
 Visualize an individual data set by file name:
-  Call the function ''' analyze(fileName) '''
+- Call the function ``` analyze(fileName) ```
 
 ## Required MATLAB Packages:
 - Financial Toolbox
