@@ -2,12 +2,11 @@ function [maxima, maxDate, minima, minDate] = maxes_mins(x,y)
     %% Find Local Mins and Maxes
     
     %min separation for peak from other largeer peaks to be considered
-    %filters out less impactful noise
-    k = 10;
+    k = length(x)/
     
     % run to plot local mins and maxes on stock plot
-    [maxima,maxIdx] = findpeaks(y,'MinPeakDistance',k);
-    [minima,minIdx] = findpeaks(-y,'MinPeakDistance',k);
+    [maxima,maxIdx] = findpeaks(y,);
+    [minima,minIdx] = findpeaks(-y);
     minima = minima * -1;
 
     maxDate = alignByX(x,maxIdx);

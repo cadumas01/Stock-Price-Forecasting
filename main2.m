@@ -1,5 +1,5 @@
 %Updated version of main that uses analyze function
-clf
+close all
 analyze("PFE")
 analyze("AES")
 analyze("MER")

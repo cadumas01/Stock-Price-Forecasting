@@ -14,38 +14,72 @@ function analyze(fileName)
     %% Calculate Moving Average
     %k pt. movinge means
 
-    k = fix(length(data)/20);    
-    movAvg = movmean(price,k);
+    k1 = fix(length(data)/20);    
+    movAvg = movmean(price,k1);
 
     
-    %% Caluclate Mins and Max of Moving Avg 
-    [maximaMovAvg, maxMovAvgDate, minimaMovAvg, minMovAvgDate] = maxes_mins(date,movAvg);
+    %% Caluclate Mins and Max of Moving Avg - maybe delete
+    % [maximaMovAvg, maxMovAvgDate, minimaMovAvg, minMovAvgDate] = maxes_mins(date,movAvg);
+    
+ 
     
     %% Running Regressions
-    regMovAvgMax1 = fitlm(maxMovAvgDate,maximaMovAvg);
+    %regMovAvgMax1 = fitlm(maxMovAvgDate,maximaMovAvg);
+    regMax = fitlm(maxDate, maxima);
+ 
+    
     
     %% Plot Data
     figure
     plot(date,price)
     hold on
-   % plot(maxDate,maxima,'og') % disabled low scale extrema for now
-    %plot(minDate,minima,'or') % disabled 
     
-    plot(date,movAvg,'m')
-    
-    plot(maxMovAvgDate,maximaMovAvg,'^g')
-    plot(regMovAvgMax1);
+    plot(maxDate,maxima,'-og')
+    plot(minDate,minima,'-or') 
     
     
-    plot(minMovAvgDate,minimaMovAvg,'^r')
+   % plot(regMax)
+    
+    %plot(date,movAvg,'m')
+    
+   % plot(maxMovAvgDate,maximaMovAvg,'^g')
+   % plot(regMovAvgMax1);
+   
+   % plot(minMovAvgDate,minimaMovAvg,'^r')
+   
+   
     
     title(fileName)
     xlabel('Date')
     ylabel('Price')
+    
+    [rToS, sToR] = floorCeilingCut(price, date, maxDate, maxima, minDate, minima)
+    p = 6
+    minima(p) > maxima
+    minima(p)
+    maxima 
+    
+    q = 4
+    maxima(q) < minima
+    maxima(q)
+    minima 
 end
 
 % If the new floor is equal to the old ceiling (within a interval),
 % Then cut the data into two sections
-function [x,y] = floorCeilingCut(x,y)
-%Add code here
+% rToS is resistence to support dates
+% sToR is support to resistence dates
+function [rToS, sToR] = floorCeilingCut(price, date, maxDate, maxima, minDate, minima)
+
+    rToS = [1 ];
+    sToR = [2];
+    
+    for i = 1: length(minDate) %maybe refactor to start at first date and just go to endDate
+        if minima(i) > maxima 
+            rToS = [rToS; minDate(i)];
+        end
+    end
+    
+    
+    
 end

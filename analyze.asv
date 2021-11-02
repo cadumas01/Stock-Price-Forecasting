@@ -14,29 +14,61 @@ function analyze(fileName)
     %% Calculate Moving Average
     %k pt. movinge means
 
-    k = fix(length(data)/20);    
-    movAvg = movmean(price,k);
+    k1 = fix(length(data)/20);    
+    movAvg = movmean(price,k1);
 
     
-    %% Caluclate Mins and Max of Moving Avg
-    [maximaMovAvg, maxMovAvgDate, minimaMovAvg, minMovAvgDate] = maxes_mins(date,movAvg);
+    %% Caluclate Mins and Max of Moving Avg - maybe delete
+    % [maximaMovAvg, maxMovAvgDate, minimaMovAvg, minMovAvgDate] = maxes_mins(date,movAvg);
+    
+ 
+    
+    %% Running Regressions
+    %regMovAvgMax1 = fitlm(maxMovAvgDate,maximaMovAvg);
+    regMax = fitlm(maxDate, maxima);
+ 
+    
     
     %% Plot Data
     figure
     plot(date,price)
     hold on
-   % plot(maxDate,maxima,'og') % disabled low scale extrema for now
-    %plot(minDate,minima,'or') % disabled 
     
-    plot(date,movAvg,'m')
+    plot(maxDate,maxima,'-og')
+    plot(minDate,minima,'-or') 
     
-    plot(maxMovAvgDate,maximaMovAvg,'^g')
-    reg1 = fitlm(maxMovAvgDate,maximaMovAvg)
     
-    plot(minMovAvgDate,minimaMovAvg,'^r')
+   % plot(regMax)
+    
+    %plot(date,movAvg,'m')
+    
+   % plot(maxMovAvgDate,maximaMovAvg,'^g')
+   % plot(regMovAvgMax1);
+   
+   % plot(minMovAvgDate,minimaMovAvg,'^r')
+   
+   
     
     title(fileName)
     xlabel('Date')
     ylabel('Price')
 end
 
+% If the new floor is equal to the old ceiling (within a interval),
+% Then cut the data into two sections
+% rToS is resistence to support dates
+% sToR is support to resistence dates
+function [rToS, sToR] = floorCeilingCut(price, date, maxDate, maxima, minDate, minima)
+
+    rToS = [];
+    sToR = [];
+    
+    for i = 1: length(minDate) %maybe refactor to start at first date and just go to endDate
+        if minima(i) > maxima 
+            rToS = [rToS;minDate(i)];
+        end
+    end
+    
+    
+    
+end
