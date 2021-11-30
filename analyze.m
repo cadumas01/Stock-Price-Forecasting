@@ -1,4 +1,4 @@
-% Modified version of main. Eliminates code dupllication. Make sure to pass
+% Modified version of main. Eliminates code duplication. Make sure to pass
 % fileName as a string (in quotes)
 % Ex: >> analyze("PFE")
 function analyze(fileName)
@@ -16,7 +16,14 @@ function analyze(fileName)
 
     k1 = fix(length(data)/20);    
     movAvg = movmean(price,k1);
-
+    movAvgX = (1:length(movAvg));
+    plot(movAvg)
+    hold on
+    p = polyfit(movAvgX,movAvg,1);
+    f = @(x) (p(1)*x + p(2));
+    plot(f(movAvgX))
+    title('Trendline: Slope = Momentum')
+    hold off
     
     %% Caluclate Mins and Max of Moving Avg - maybe delete
     % [maximaMovAvg, maxMovAvgDate, minimaMovAvg, minMovAvgDate] = maxes_mins(date,movAvg);
