@@ -21,6 +21,7 @@ function analyze(fileName)
     hold on
     p = polyfit(movAvgX,movAvg,1);
     f = @(x) (p(1)*x + p(2));
+    momentum = p(1);
     plot(f(movAvgX))
     title('Trendline: Slope = Momentum')
     hold off
