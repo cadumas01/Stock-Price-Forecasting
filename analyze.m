@@ -7,8 +7,11 @@ function analyze(fileName)
    
     %% Calculate Mins and Maxes of Price
     date = data(:,1);
+    date = date - date(1); 
     price = data(:,2);
     [maxima, maxDate, minima, minDate] = maxes_mins(date, price);
+    max = [maxDate, maxima];
+    min =[minDate, minima];
   
     
     %% Calculate Moving Average
@@ -54,40 +57,12 @@ function analyze(fileName)
    % plot(regMovAvgMax1);
    
    % plot(minMovAvgDate,minimaMovAvg,'^r')
-   
-   
     
     title(fileName)
     xlabel('Date')
     ylabel('Price')
     
-    [rToS, sToR] = floorCeilingCut(price, date, maxDate, maxima, minDate, minima)
-    p = 6
-    minima(p) > maxima
-    minima(p)
-    maxima 
-    
-    q = 4
-    maxima(q) < minima
-    maxima(q)
-    minima 
-end
-
-% If the new floor is equal to the old ceiling (within a interval),
-% Then cut the data into two sections
-% rToS is resistence to support dates
-% sToR is support to resistence dates
-function [rToS, sToR] = floorCeilingCut(price, date, maxDate, maxima, minDate, minima)
-
-    rToS = [1 ];
-    sToR = [2];
-    
-    for i = 1: length(minDate) %maybe refactor to start at first date and just go to endDate
-        if minima(i) > maxima 
-            rToS = [rToS; minDate(i)];
-        end
-    end
-    
+    [rToS, sToR] = floorCeilingCut(date,min,max)
     
     
 end
