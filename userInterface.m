@@ -20,8 +20,8 @@ fprintf("\n\n ----- HISTORICAL ANALYSIS & SHORT-TERM FORECAST ----- \n")
 for i = 1:length(patterns)
     
     description = strcat(int2str(patterns(i,3)), int2str(patterns(i,4)));
-    startDate = str2num(patterns(i,1));
-    endDate = str2num(patterns(i,2));
+    startDate = (patterns(i,1));
+    endDate = (patterns(i,2));
  
     if i == length(patterns)
         fprintf("\n\n The following prediction the most recent pattern recognized. Base any decisions off of this.")
