@@ -31,8 +31,8 @@ function [patterns, momentum] =  analyze(fileName)
     hold off
     syms x
     f2 = p(1)*x.^2 + p(2)*x + p(3);
-    firstDeriv = (diff(f2)) % tweak
-    secondDeriv = (diff(f2,2)) % tweak
+    firstDeriv = (diff(f2)); % tweak
+    secondDeriv = (diff(f2,2)); % tweak
     
     %% Caluclate Mins and Max of Moving Avg - maybe delete
     % [maximaMovAvg, maxMovAvgDate, minimaMovAvg, minMovAvgDate] = maxes_mins(date,movAvg);

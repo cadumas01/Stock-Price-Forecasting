@@ -18,10 +18,10 @@ function [rToS, sToR] = floorCeilingCut(data,min,max)
     %reached. The back point is the previously identified break point. This
     %moving back index prevents preveious maximums from triggering multiple
     %later minimums as break points
-    maxIndexFront = 1
-    maxIndexBack = 1
+    maxIndexFront = 1;
+    maxIndexBack = 1;
     
-    minIndex = 1
+    minIndex = 1;
     
     while minIndex <= length(min)
         if min(minIndex, 1) > max(maxIndexFront,1) 
@@ -36,7 +36,7 @@ function [rToS, sToR] = floorCeilingCut(data,min,max)
                 if min(minIndex, 2) > max(i, 2) 
                     % A break point has been identified, add this minimum
                     % to the list of resistence to support points
-                    rToS = [rToS; min(minIndex,1), min(minIndex,2)]
+                    rToS = [rToS; min(minIndex,1), min(minIndex,2)];
                     
                     % The back index (the oldest maximum that is a
                     % contender for the next breakpoint) is now the next
@@ -46,7 +46,7 @@ function [rToS, sToR] = floorCeilingCut(data,min,max)
                 end 
             end
             %Iterate the front index forward
-            maxIndexFront = maxIndexFront + 1
+            maxIndexFront = maxIndexFront + 1;
         else % if the current minDate is behind the front maxDate 
             % then increase minIndex
           minIndex = minIndex + 1;
@@ -57,10 +57,10 @@ function [rToS, sToR] = floorCeilingCut(data,min,max)
     
     
     %% This section identifies changes in support to resistence 
-    minIndexFront = 1
-    minIndexBack = 1
+    minIndexFront = 1;
+    minIndexBack = 1;
     
-    maxIndex = 1
+    maxIndex = 1;
     
     while maxIndex <= length(max)
         if min(maxIndex, 1) > max(minIndexFront,1) 
@@ -75,7 +75,7 @@ function [rToS, sToR] = floorCeilingCut(data,min,max)
                 if max(maxIndex, 2) < min(i, 2) 
                     % A break point has been identified, add this maximum
                     % to the list of support to resistence 
-                    sToR = [sToR; max(maxIndex,1), max(maxIndex,2)]
+                    sToR = [sToR; max(maxIndex,1), max(maxIndex,2)];
                     
                     % The back index (the earliest minimum that is a
                     % contender for the next breakpoint) is now the next
@@ -85,7 +85,7 @@ function [rToS, sToR] = floorCeilingCut(data,min,max)
                 end 
             end
             %Iterate the front index forward
-            minIndexFront = minIndexFront + 1
+            minIndexFront = minIndexFront + 1;
         else 
           maxIndex = maxIndex + 1;
         end
