@@ -66,7 +66,16 @@ function [patterns, momentum] =  analyze(fileName)
     xlabel('Date')
     ylabel('Price')
     
-    [rToS, sToR] = floorCeilingCut(date,min,max)
+    [rToS, sToR] = floorCeilingCut(date,min,max);
+    
+    %% Detect Patterns
+    [dates] = patternDetect(sToR,rToS);
+    for i = 1:length(dates(:,1))
+        [rtrend, strend] = Trends(dates(i,:),maxDate,minDate,maxima,minima);
+        [pattern, rec] = Patterns(rtrend, strend)
+    end
+    
+    
     
     
 end
