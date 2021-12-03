@@ -80,8 +80,7 @@ function [patterns, momentum] =  analyze(fileName)
         pattOut(i,:) = [dates(i,:) pattern rec];
     end
     hold on
-    linesm = linesm'
-    plot([linesm(1,:) linesm(3,:)],[linesm(2,:) linesm(4,:)],'r--');
+    plot(linesm(:,1), linesm(:,2),linesm(:,3), linesm(:,4),'r--');
     pattOut
     
     
