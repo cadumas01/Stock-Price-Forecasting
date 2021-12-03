@@ -12,12 +12,15 @@ stock = input(['Which of the following stocks would you like to analyze? (case s
 % patterns is a n by 3 matrix. There are n entries, each with pattern
 % description (1st col), a start date (2nd col) and end date (3rd col)
 
-% patterns = analyze(stock);
+% [patterns, momentum] = analyze(stock);
 disp(strcat(stock,' Analysis:'))
 BuFP = 23;
 BeRW = 4;
 
-patterns = ["BuFP", 4, 30; "BuFW", 50, 70; "BeRW", 80, 130]
+patterns = ["BuFP", 4, 30; "BuFW", 50, 70; "BeRW", 80, 130];
+momentum = [3, -1];
+
+fprintf("\n\n ----- HISTORICAL ANALYSIS & SHORT-TERM FORECAST ----- \n")
 
 for i = 1:length(patterns)
     description = patterns(i,1);
@@ -25,26 +28,51 @@ for i = 1:length(patterns)
     endDate = str2num(patterns(i,3));
  
     if i == length(patterns)
-        print("\n\n This is the final pattern recognized. Base any decisions off of this")
+        fprintf("\n\n This is the most recent pattern recognized. Base any decisions off of this")
     end
     
     switch description
         case "BuFP"
-            fprintf('A bullish flag pattern exists from %f to %f',[startDate; endDate])
+            fprintf('\n A bullish flag pattern exists from day %i to day %i',[startDate; endDate])
         case "BuPP"
-            fprintf('A bullish pennant pattern exists from %f to %f',[startDate; endDate])
+            fprintf('\n A bullish pennant pattern exists from day %i to day %i',[startDate; endDate])
         case "BuFW"
-            fprintf('A bullish falling wedge exists from %f to %f',[startDate; endDate])
+            fprintf('\n A bullish falling wedge exists from day %i to day %i',[startDate; endDate])
         case 'BeFP'
-            fprintf('A bearish flag pattern exists from %f to %f',[startDate; endDate])
+            fprintf('\n A bearish flag pattern exists from day %i to day %i',[startDate; endDate])
         case 'BePP'
-            fprintf('A bearish pennant pattern exists from %f to %f',[startDate; endDate])
+            fprintf('\n A bearish pennant pattern exists from day %i to day %i',[startDate; endDate])
         case 'BeRW'
-            fprintf('A bearish rising wedge exists from %f to %f',[startDate; endDate])
+            fprintf('\n A bearish rising wedge exists from day %i to day %i',[startDate; endDate])
     end
     
           
 end
+
+
+fprintf("\n Refer to the annotated graph for further consultation.")
+
+
+fprintf("\n\n\n ----- LONG-TERM FORECAST ----- \n\n")
+
+firstDeriv = momentum(1);
+secondDeriv = momentum(2);
+
+if firstDeriv > 0
+    if secondDeriv > 0 
+        fprintf(" There is increasingly positive momentum. This is a long-term bullish signal.\n")
+    else
+        fprintf(" There is decreasingly positive momentum. This is a long-term bullish signal, however this may indicate prices are beginning to reach ceiling.\n")
+    end
+else
+     if secondDeriv > 0 
+        fprintf(" There is decreasingly negative momentum. This is a long-term bearish signal, however this may indicate prices are beginning to reach floor.\n")
+    else
+        fprintf(" There is increasingly negative momentum. This is a long-term bearish signal.\n")
+    end 
+end
+
+
 
 
 % if exist('BuFP','var') == 1

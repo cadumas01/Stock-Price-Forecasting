@@ -1,7 +1,7 @@
 % Modified version of main. Eliminates code duplication. Make sure to pass
 % fileName as a string (in quotes)
 % Ex: >> analyze("PFE")
-function analyze(fileName)
+function [patterns, momentum] =  analyze(fileName)
     %% Read in Data
     data = excelReader(fileName);
    
