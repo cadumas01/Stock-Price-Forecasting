@@ -6,7 +6,7 @@ This software is intended to use technical analysis to predict stock prices base
 
 ## Usage 
 Visualize multiple data sets at once:<br >
-- Call the script: ``` main2 ```
+- Call the script: ``` userInterface ```
 
 Visualize an individual data set by file name:
 - Call the function ``` analyze(fileName) ```
