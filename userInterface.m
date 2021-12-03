@@ -28,7 +28,7 @@ for i = 1:length(patterns)
     endDate = str2num(patterns(i,3));
  
     if i == length(patterns)
-        fprintf("\n\n This is the most recent pattern recognized. Base any decisions off of this")
+        fprintf("\n\n The following prediction the most recent pattern recognized. Base any decisions off of this.")
     end
     
     switch description
@@ -50,7 +50,7 @@ for i = 1:length(patterns)
 end
 
 
-fprintf("\n Refer to the annotated graph for further consultation.")
+fprintf("\n\n Refer to the annotated graph for further consultation.")
 
 
 fprintf("\n\n\n ----- LONG-TERM FORECAST ----- \n\n")
