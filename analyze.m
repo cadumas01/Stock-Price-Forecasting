@@ -21,13 +21,18 @@ function [patterns, momentum] =  analyze(fileName)
     movAvg = movmean(price,k1);
     movAvgX = (1:length(movAvg));
     plot(movAvg)
+    figure(1)
     hold on
-    p = polyfit(movAvgX,movAvg,1);
-    f = @(x) (p(1)*x + p(2));
+    p = polyfit(movAvgX,movAvg,2);
+    f = @(x) (p(1)*x.^2 + p(2)*x + p(3));
     momentum = p(1);
     plot(f(movAvgX))
     title('Trendline: Slope = Momentum')
     hold off
+    syms x
+    f2 = p(1)*x.^2 + p(2)*x + p(3);
+    firstDeriv = (diff(f2)) % tweak
+    secondDeriv = (diff(f2,2)) % tweak
     
     %% Caluclate Mins and Max of Moving Avg - maybe delete
     % [maximaMovAvg, maxMovAvgDate, minimaMovAvg, minMovAvgDate] = maxes_mins(date,movAvg);
@@ -41,7 +46,7 @@ function [patterns, momentum] =  analyze(fileName)
     
     
     %% Plot Data
-    figure
+    figure(2)
     plot(date,price)
     hold on
     
