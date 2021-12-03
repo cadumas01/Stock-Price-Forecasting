@@ -14,7 +14,7 @@ function [patterns, momentum] =  analyze(fileName)
     min =[minDate, minima];
   
     
-    %% Calculate Moving Average
+    %% Calculate Moving Average and
     %k pt. movinge means
 
     k1 = fix(length(data)/20);    
@@ -72,18 +72,12 @@ function [patterns, momentum] =  analyze(fileName)
     %% Detect Patterns
     [dates] = patternDetect(sToR,rToS);
     pattOut = zeros(length(dates(:,1)),4);
-    linesm = [];
-    linesmi = [];
     for i = 1:length(dates(:,1))
-        [rtrend, strend, linem, linemi] = Trends(dates(i,:),maxDate,minDate,maxima,minima);
+        [rtrend, strend] = Trends(dates(i,:),maxDate,minDate,maxima,minima);
         [pattern, rec] = Patterns(rtrend, strend);
-        linesm = [linesm;linem];
-        linesmi = [linesmi;linemi];
         pattOut(i,:) = [dates(i,:) pattern rec];
     end
-    resistance = [linesm(:,1),linesm(:,2)]
-    plot(linesm(:,1),linesm(:,2),'k-','LineWidth',1.5);
-    plot(linesmi(:,1),linesmi(:,2),'k-','LineWidth',1.5);
+    pattOut
     
     
     
