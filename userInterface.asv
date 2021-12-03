@@ -12,14 +12,19 @@ stock = input(['Which of the following stocks would you like to analyze? (case s
 % patterns is a n by 3 matrix. There are n entries, each with pattern
 % description (1st col), a start date (2nd col) and end date (3rd col)
 
-[patterns, momentum] = analyze(stock);
+% [patterns, momentum] = analyze(stock);
 disp(strcat(stock,' Analysis:'))
+BuFP = 23;
+BeRW = 4;
+
+patterns = ["BuFP", 4, 30; "BuFW", 50, 70; "BeRW", 80, 130];
+momentum = [3, -1];
 
 fprintf("\n\n ----- HISTORICAL ANALYSIS & SHORT-TERM FORECAST ----- \n")
 
 for i = 1:length(patterns)
     
-    description = strcat(int2str(patterns(i,3)), int2str(patterns(i,4)));
+    description = strcat(int2str(patterns(i,3)), int2str(patterns(i,4))) ;
     startDate = str2num(patterns(i,1));
     endDate = str2num(patterns(i,2));
  
@@ -33,13 +38,17 @@ for i = 1:length(patterns)
         case "11"
             fprintf('\n A bullish flag pattern exists from day %i to day %i',[startDate; endDate])
         case "21"
-            fprintf('\n A bullish expanding triangle pattern exists from day %i to day %i',[startDate; endDate])
-        case "10"
+            fprintf('\n A bullish expanding pattern exists from day %i to day %i',[startDate; endDate])
+%         case "BuPP"
+%             fprintf('\n A bullish pennant pattern exists from day %i to day %i',[startDate; endDate])
+%         case "BuFW"
+%             fprintf('\n A bullish falling wedge exists from day %i to day %i',[startDate; endDate])
+        case 'BeFP'
             fprintf('\n A bearish flag pattern exists from day %i to day %i',[startDate; endDate])
-        case "20"
-            fprintf('\n A bearish expanding triangle pattern exists from day %i to day %i',[startDate; endDate])
-        otherwise
-            fprintf('\n No discernable pattern exists from day %i to day %i',[startDate; endDate])
+        case 'BePP'
+            fprintf('\n A bearish pennant pattern exists from day %i to day %i',[startDate; endDate])
+        case 'BeRW'
+            fprintf('\n A bearish rising wedge exists from day %i to day %i',[startDate; endDate])
     end
     
           
