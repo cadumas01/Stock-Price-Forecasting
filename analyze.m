@@ -80,8 +80,9 @@ function [patterns, momentum] =  analyze(fileName)
         linesmi = [linesmi;linemi];
         pattOut(i,:) = [dates(i,:) pattern rec];
     end
-    plot(linesm(:,1),linesm(:,2));
-    plot(linesmi(:,1),linesmi(:,2));
+    resistance = [linesm(:,1),linesm(:,2)]
+    plot(linesm(:,1),linesm(:,2),'k-','LineWidth',1.5);
+    plot(linesmi(:,1),linesmi(:,2),'k-','LineWidth',1.5);
     
     
     
