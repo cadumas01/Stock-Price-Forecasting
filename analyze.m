@@ -48,8 +48,7 @@ function analyze(fileName)
     plot(maxDate,maxima,'-og')
     plot(minDate,minima,'-or') 
     
-    
-   plot(regMax)
+    plot(regMax)
     
     %plot(date,movAvg,'m')
     
