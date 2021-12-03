@@ -71,11 +71,17 @@ function [patterns, momentum] =  analyze(fileName)
     %% Detect Patterns
     [dates] = patternDetect(sToR,rToS);
     pattOut = zeros(length(dates(:,1)),4);
+    lines = [];
     for i = 1:length(dates(:,1))
-        [rtrend, strend] = Trends(dates(i,:),maxDate,minDate,maxima,minima);
+        [rtrend, strend, linem, linemi] = Trends(dates(i,:),maxDate,minDate,maxima,minima);
         [pattern, rec] = Patterns(rtrend, strend);
+        linesm(i,:) = linem;
+        linesmi(i,:) = linemi;
         pattOut(i,:) = [dates(i,:) pattern rec];
     end
+    hold on
+    linesm = linesm'
+    plot([linesm(1,:) linesm(3,:)],[linesm(2,:) linesm(4,:)],'r--');
     pattOut
     
     
