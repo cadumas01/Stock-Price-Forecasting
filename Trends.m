@@ -1,7 +1,7 @@
 function [rtrend strend] = trends(dates,maxd,mind, maxp, minp)
    s = dates(1);
    e = dates(2);
-   fprintf('Beginning: %i End: %i\n',s,e)
+   %fprintf('Beginning: %i End: %i\n',s,e)
    maxd = maxd';
    mind = mind';
    [val,i]=min(abs(maxd-s));
