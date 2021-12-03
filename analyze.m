@@ -71,7 +71,7 @@ function [patterns, momentum] =  analyze(fileName)
     
     %% Detect Patterns
     [dates] = patternDetect(sToR,rToS);
-    patterns = zeros(length(dates(:,1)),4);
+    pattOut = zeros(length(dates(:,1)),4);
     linesm = [];
     linesmi = [];
     for i = 1:length(dates(:,1))
@@ -79,11 +79,11 @@ function [patterns, momentum] =  analyze(fileName)
         [pattern, rec] = Patterns(rtrend, strend);
         linesm = [linesm;linem];
         linesmi = [linesmi;linemi];
-        patterns(i,:) = [dates(i,:) pattern rec];
+        pattOut(i,:) = [dates(i,:) pattern rec];
     end
-    resistance = [linesm(:,1),linesm(:,2)]
     plot(linesm(:,1),linesm(:,2),'k-','LineWidth',1.5);
     plot(linesmi(:,1),linesmi(:,2),'k-','LineWidth',1.5);
+    legend("Price","Resistence","Support","","","","","Trend Line")
     
     
     
