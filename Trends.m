@@ -11,6 +11,7 @@ function [rtrend strend linem, linemi] = trends(dates,maxd,mind, maxp, minp)
    mis = i-1;
    [val,i]=min(abs(mind-e));
    mie = i-1;
+   fprintf("\n Here is mie: %i | here is mis: %i ", mie, mis)
    strend = (minp(mie)-minp(mis))/(mind(mie)-mind(mis));
    rtrend = (maxp(mae)-maxp(mas))/(maxd(mae)-maxd(mas));
    linem = [maxd(mas) maxp(mas); maxd(mae) maxp(mae)];

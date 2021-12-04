@@ -4,7 +4,7 @@ function [dates] = identify(stor,rtos)
     cha = [stor ; rtos];
     [~,i] = sort(cha(:,1));
     cha = cha(i,:);
-    dates = zeros(length(cha(:,1))/2,2);
+    dates = zeros(int32(floor(length(cha(:,1))))/2,2);
     i = 1;
     j = 1;
     while i < length(cha)
