@@ -23,7 +23,7 @@ function [rToS, sToR] = floorCeilingCut(data,min,max)
     
     minIndex = 1;
     
-    while minIndex <= length(min)
+    while minIndex <= length(min) && maxIndexFront <= length(max)
         if min(minIndex, 1) > max(maxIndexFront,1) 
             %the current min point is ahead of the front max point, thus 
             % there is a possible break point
@@ -62,8 +62,10 @@ function [rToS, sToR] = floorCeilingCut(data,min,max)
     
     maxIndex = 1;
     
-    while maxIndex <= length(max)
-        if min(maxIndex, 1) > max(minIndexFront,1) 
+    fprintf("\n Here is length(max): %i | Here is lenght(min):  %i " , length(max), length(min)) ;
+    while maxIndex <= length(max) && minIndexFront <= length(min)
+        fprintf("\n Here is maxIndex: %i | Here is minIndexBack:  %i | Here is minIndexFront:  %i", maxIndex,minIndexBack, minIndexFront) ;
+        if max(maxIndex, 1) > min(minIndexFront,1) % Check to make sure this is correct before pushing
             %the current max point is ahead of the front min point, thus 
             % there is a possible break point
             
