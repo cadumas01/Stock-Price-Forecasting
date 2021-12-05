@@ -26,7 +26,9 @@ function [patterns, momentum] =  analyze(fileName)
     p = polyfit(movAvgX,movAvg,2);
     f = @(x) (p(1)*x.^2 + p(2)*x + p(3));
     plot(f(movAvgX))
-    title('Trendline: Slope = Momentum')
+    title('Momentum Visualization')
+    xlabel('Time (days)')
+    ylabel('Price ($)')
     hold off
     syms x
     f2 = p(1)*x.^2 + p(2)*x + p(3);
@@ -34,7 +36,7 @@ function [patterns, momentum] =  analyze(fileName)
     firstDerivNum = double(vpa(subs(firstDerivSym,x,date(length(date)))));
     secondDerivSym = (diff(f2,2)); % tweak
     secondDerivNum = double(vpa(subs(secondDerivSym,x,date(length(date)))));
-    momentum = [firstDerivNum secondDerivNum]
+    momentum = [firstDerivNum secondDerivNum];
     %% Caluclate Mins and Max of Moving Avg - maybe delete
     % [maximaMovAvg, maxMovAvgDate, minimaMovAvg, minMovAvgDate] = maxes_mins(date,movAvg);
     
@@ -64,8 +66,8 @@ function [patterns, momentum] =  analyze(fileName)
    % plot(minMovAvgDate,minimaMovAvg,'^r')
     
     title(fileName)
-    xlabel('Date')
-    ylabel('Price')
+    xlabel('Time (days)')
+    ylabel('Price ($)')
     
     [rToS, sToR] = floorCeilingCut(date,min,max);
     
@@ -83,5 +85,5 @@ function [patterns, momentum] =  analyze(fileName)
     end
     plot(linesm(:,1),linesm(:,2),'k-','LineWidth',1);
     plot(linesmi(:,1),linesmi(:,2),'k-','LineWidth',1);
-    legend("Price","Resistence","Support","","","","","Trend Line")
+    legend("Price","Resistence","Support","Stock","Overall Trend","Confidence Bounds","","Trend Line")
 end
