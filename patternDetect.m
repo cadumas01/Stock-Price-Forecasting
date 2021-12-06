@@ -1,4 +1,5 @@
 %%
+%Puts the dates into a n x 2 matrix for passing on to Trends
 
 function [dates] = identify(stor,rtos)
     cha = [stor ; rtos];
