@@ -2,7 +2,7 @@
 % Then cut the data into two sections
 % rToS is resistence to support dates
 % sToR is support to resistence dates
-function [rToS, sToR] = floorCeilingCut(data,min,max)
+function [rToS, sToR] = floorCeilingCut(min,max)
 
     rToS = [];
     sToR = [];
@@ -62,9 +62,7 @@ function [rToS, sToR] = floorCeilingCut(data,min,max)
     
     maxIndex = 1;
     
-    fprintf("\n Here is length(max): %i | Here is lenght(min):  %i " , length(max), length(min)) ;
     while maxIndex <= length(max) && minIndexFront <= length(min)
-        fprintf("\n Here is maxIndex: %i | Here is minIndexBack:  %i | Here is minIndexFront:  %i", maxIndex,minIndexBack, minIndexFront) ;
         if max(maxIndex, 1) > min(minIndexFront,1) % Check to make sure this is correct before pushing
             %the current max point is ahead of the front min point, thus 
             % there is a possible break point
