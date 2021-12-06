@@ -40,11 +40,11 @@ for i = 1:length(patterns)
     %%Rec: 0 is Bearish, 1 is Bullish, 2 No Clear Signal
     switch description
         case "11"
-            fprintf('\n A bullish flag pattern exists from day %i to day %i',[startDate; endDate])
+            fprintf('\n A bullish falling wedge pattern exists from day %i to day %i',[startDate; endDate])
         case "21"
             fprintf('\n A bullish expanding triangle pattern exists from day %i to day %i',[startDate; endDate])
         case "10"
-            fprintf('\n A bearish flag pattern exists from day %i to day %i',[startDate; endDate])
+            fprintf('\n A bearish rising wedge pattern exists from day %i to day %i',[startDate; endDate])
         case "20"
             fprintf('\n A bearish expanding triangle pattern exists from day %i to day %i',[startDate; endDate])
         otherwise
