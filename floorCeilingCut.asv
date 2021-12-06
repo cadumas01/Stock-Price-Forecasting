@@ -1,6 +1,4 @@
-% Returns indices (and corresponding prices) places of support-resistence
-% reversals - both resistence to support and support to resistence.
-% Requires local mins and maximums of a dataset.
+% Finds places of support-resistence reversals. 
 function [rToS, sToR] = floorCeilingCut(min,max)
 
     rToS = [];

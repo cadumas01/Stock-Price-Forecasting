@@ -1,3 +1,5 @@
+%Returns maxima the local extrema (with their indices) of x,y pairs of
+%data
 function [maxima, maxDate, minima, minDate] = maxes_mins(x,y)
     %% Find Local Mins and Maxes
     
