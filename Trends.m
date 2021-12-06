@@ -4,11 +4,11 @@ function [rtrend strend linem, linemi] = trends(dates,maxd,mind, maxp, minp)
    maxd = maxd';
    mind = mind';
    [val,i]=min(abs(maxd-s));
-   mas = i+1;
+   mas = i;
    [val,i]=min(abs(maxd-e));
    mae = i;
    [val,i]=min(abs(mind-s));
-   mis = i+1;
+   mis = i;
    [val,i]=min(abs(mind-e));
    mie = i;
    fprintf("\n Here is mie: %i | here is mis: %i ", mie, mis)
