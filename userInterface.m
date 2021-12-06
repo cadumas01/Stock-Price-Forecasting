@@ -1,3 +1,9 @@
+%% UserInterface 
+% Program asks user to input a listed stock to analyze and returns
+% historical trends present in the stock performance. The long term trend
+% of the market is also stated, which is based on the momentum of the
+% stock over the tracked range of days. An annotated plot of the stock
+% performance is also provided to further advise the user.
 clear all
 close all
 stock = input(['Which of the following stocks would you like to analyze? (case sensitive)',...
@@ -11,14 +17,16 @@ stock = input(['Which of the following stocks would you like to analyze? (case s
             '\n input: '], 's');
         
         
-% patterns is a n by 3 matrix. There are n entries, each with pattern
-% description (1st col), a start date (2nd col) and end date (3rd col)
+% 'patterns' is a n x 3 matrix. There are n entries, each with a pattern
+% description (1st col), a start day (2nd col) and end day (3rd col).
 
-[patterns, momentum] = analyze(stock);
+[patterns, momentum] = analyze(stock); % calls function analyze with on the user-input stock
 disp(strcat(stock,' Analysis:'))
 
 fprintf("\n\n ----- HISTORICAL ANALYSIS & SHORT-TERM FORECAST ----- \n")
 
+% loop to read through 'patterns' and print the identified trends with their
+% start and end days
 for i = 1:length(patterns)
     
     description = strcat(int2str(patterns(i,3)), int2str(patterns(i,4)));
@@ -26,10 +34,10 @@ for i = 1:length(patterns)
     endDate = (patterns(i,2));
  
     if i == length(patterns)
-        fprintf("\n\n The following prediction the most recent pattern recognized. Base any decisions off of this.")
+        fprintf("\n\n The following prediction is the most recent pattern recognized. Base any decisions off of this.")
     end
     
-    %%Patterns: 1 is wedge/flag, 2 is expanding triangle, 3 is no pattern
+    %%Patterns: 1 is wedge/flag, 2 is an expanding triangle, 3 is no pattern
     %%Rec: 0 is Bearish, 1 is Bullish, 2 No Clear Signal
     switch description
         case "11"
@@ -53,9 +61,11 @@ fprintf("\n\n Refer to the annotated graph for further consultation.")
 
 fprintf("\n\n\n ----- LONG-TERM FORECAST ----- \n\n")
 
+% assign elements of 'momentum' to their appropriate derivative 
 firstDeriv = momentum(1);
 secondDeriv = momentum(2);
 
+% logical statements to print appropriate long-term trend
 if firstDeriv > 0
     if secondDeriv > 0 
         fprintf(" There is increasingly positive momentum. This is a long-term bullish signal.\n")
@@ -69,4 +79,3 @@ else
         fprintf(" There is increasingly negative momentum. This is a long-term bearish signal.\n")
     end 
 end
-
