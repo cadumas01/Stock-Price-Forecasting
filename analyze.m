@@ -14,8 +14,7 @@ function [patterns, momentum] =  analyze(fileName)
     min =[minDate, minima];
   
     
-    %% Calculate Moving Average
-    %k pt. movinge means
+    %% Calculate Moving Average and Momentum
 
     k1 = fix(length(data)/20);    
     movAvg = movmean(price,k1);
@@ -31,23 +30,15 @@ function [patterns, momentum] =  analyze(fileName)
     ylabel('Price ($)')
     hold off
     syms x
+    
     f2 = p(1)*x.^2 + p(2)*x + p(3);
     firstDerivSym = (diff(f2));% tweak
     firstDerivNum = double(vpa(subs(firstDerivSym,x,date(length(date)))));
     secondDerivSym = (diff(f2,2)); % tweak
     secondDerivNum = double(vpa(subs(secondDerivSym,x,date(length(date)))));
     momentum = [firstDerivNum secondDerivNum];
-    %% Caluclate Mins and Max of Moving Avg - maybe delete
-    % [maximaMovAvg, maxMovAvgDate, minimaMovAvg, minMovAvgDate] = maxes_mins(date,movAvg);
     
  
-    
-    %% Running Regressions
-    %regMovAvgMax1 = fitlm(maxMovAvgDate,maximaMovAvg);
-    regMax = fitlm(maxDate, maxima);
- 
-    
-    
     %% Plot Data
     figure(2)
     plot(date,price)
@@ -56,20 +47,11 @@ function [patterns, momentum] =  analyze(fileName)
     plot(maxDate,maxima,'-og')
     plot(minDate,minima,'-or') 
     
-    plot(regMax)
-    
-    %plot(date,movAvg,'m')
-    
-   % plot(maxMovAvgDate,maximaMovAvg,'^g')
-   % plot(regMovAvgMax1);
-   
-   % plot(minMovAvgDate,minimaMovAvg,'^r')
-    
     title(fileName)
     xlabel('Time (days)')
     ylabel('Price ($)')
     
-    [rToS, sToR] = floorCeilingCut(date,min,max);
+    [rToS, sToR] = floorCeilingCut(min,max);
     
     %% Detect Patterns
     [dates] = patternDetect(sToR,rToS);
