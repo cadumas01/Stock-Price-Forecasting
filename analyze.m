@@ -67,5 +67,5 @@ function [patterns, momentum] =  analyze(fileName)
     end
     plot(linesm(:,1),linesm(:,2),'k-','LineWidth',1);
     plot(linesmi(:,1),linesmi(:,2),'k-','LineWidth',1);
-    legend("Price","Resistence","Support","Stock","Overall Trend","Confidence Bounds","","Trend Line")
+    legend("Price","Resistence","Support","Pattern Bounds")
 end
