@@ -1,7 +1,7 @@
 %%
 %Puts the dates into a n x 2 matrix for passing on to Trends
 
-function [dates] = identify(stor,rtos)
+function [dates] = patternDetect(stor,rtos)
     cha = [stor ; rtos];
     [~,i] = sort(cha(:,1));
     cha = cha(i,:);
@@ -15,9 +15,3 @@ function [dates] = identify(stor,rtos)
         j = j + 1;
     end
 end
-
-
-        
-    
-        
-        

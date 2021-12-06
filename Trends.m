@@ -3,7 +3,7 @@
 %difference from the date. We then find the slope of the trend lines and
 %output
 
-function [rtrend strend linem linemi] = trends(dates, maxd, mind, maxp, minp)
+function [rtrend strend linem linemi] = Trends(dates, maxd, mind, maxp, minp)
    s = dates(1);
    e = dates(2);
    maxd = maxd';
