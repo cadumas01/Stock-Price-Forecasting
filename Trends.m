@@ -1,3 +1,8 @@
+%%
+%Finds the nearest max or min to the trend reversal by minimizing the
+%difference from the date. We then find the slope of the trend lines and
+%output
+
 function [rtrend strend linem linemi] = trends(dates, maxd, mind, maxp, minp)
    s = dates(1);
    e = dates(2);
