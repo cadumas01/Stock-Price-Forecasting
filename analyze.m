@@ -16,7 +16,7 @@ function [patterns, momentum] =  analyze(fileName)
     
     %% Calculate Moving Average and Momentum
 
-    k1 = fix(length(data)/20);    
+    k1 = 180;
     movAvg = movmean(price,k1);
     movAvgX = (1:length(movAvg));
     plot(movAvg)
@@ -28,14 +28,15 @@ function [patterns, momentum] =  analyze(fileName)
     title('Momentum Visualization')
     xlabel('Time (days)')
     ylabel('Price ($)')
+    legend('Moving Average (180 days)','Best Fit Curve')
+    
     hold off
     syms x
-    
     f2 = p(1)*x.^2 + p(2)*x + p(3);
-    firstDerivSym = (diff(f2));% tweak
-    firstDerivNum = double(vpa(subs(firstDerivSym,x,date(length(date)))));
-    secondDerivSym = (diff(f2,2)); % tweak
-    secondDerivNum = double(vpa(subs(secondDerivSym,x,date(length(date)))));
+    firstDerivSym = (diff(f2));
+    firstDerivNum = double(vpa(subs(firstDerivSym,x,length(date))));
+    secondDerivSym = (diff(f2,2)); 
+    secondDerivNum = double(vpa(subs(secondDerivSym,x,length(date))));
     momentum = [firstDerivNum secondDerivNum];
     
  
