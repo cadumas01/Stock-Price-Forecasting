@@ -19,4 +19,5 @@ function [pattern rec] = Patterns(rtrend,strend)
     else
         rec = 2;
         pattern = 3;
-    end  
+    end
+end
