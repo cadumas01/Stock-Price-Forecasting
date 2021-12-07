@@ -26,7 +26,7 @@ function [patterns, momentum] =  analyze(fileName)
     f = @(x) (p(1)*x.^2 + p(2)*x + p(3));
     plot(f(movAvgX))
     title('Momentum Visualization')
-    xlabel('Time (days)')
+    xlabel('Time (Ordinal Day)')
     ylabel('Price ($)')
     legend('Moving Average (180 days)','Best Fit Curve','Location','southeast')
     
