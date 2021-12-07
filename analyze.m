@@ -28,7 +28,7 @@ function [patterns, momentum] =  analyze(fileName)
     title('Momentum Visualization')
     xlabel('Time (days)')
     ylabel('Price ($)')
-    legend('Moving Average (180 days)','Best Fit Curve')
+    legend('Moving Average (180 days)','Best Fit Curve','Location','southeast')
     
     hold off
     syms x
