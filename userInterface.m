@@ -18,7 +18,9 @@ stock = input(['Which of the following stocks would you like to analyze? (case s
 % 'patterns' is a n x 3 matrix. There are n entries, each with a pattern
 % description (1st col), a start day (2nd col) and end day (3rd col).
 
-[patterns, momentum] = analyze(stock); % calls function analyze with on the user-input stock
+forecastWindow = 30;
+
+[patterns, momentum, patternMatches] = analyze(stock,1,forecastWindow); % calls function analyze with on the user-input stock
 disp(strcat(stock,' Analysis:'))
 
 fprintf("\n\n ----- HISTORICAL ANALYSIS & SHORT-TERM FORECAST ----- \n")
@@ -53,6 +55,8 @@ for i = 1:length(patterns)
           
 end
 
+successRate = int32(round(mean(patternMatches) * 100));
+fprintf("\n\n Using a %i trading day window following the end date of each pattern, actual trends matched predicted trends at a %i%% success rate", forecastWindow, successRate)
 
 fprintf("\n\n Refer to the annotated graph for further consultation.")
 
