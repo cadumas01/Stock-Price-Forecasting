@@ -23,7 +23,7 @@ function [patterns, momentum,patternMatches] =  analyze(fileName,displayGraphs,f
     p = polyfit(movAvgX,movAvg,2);
     f = @(x) (p(1)*x.^2 + p(2)*x + p(3));
     
-    hold off
+    
     syms x
     f2 = p(1)*x.^2 + p(2)*x + p(3);
     firstDerivSym = (diff(f2));
@@ -50,12 +50,17 @@ function [patterns, momentum,patternMatches] =  analyze(fileName,displayGraphs,f
    %% Testing Validity of Patterns 
    % forecastWindow trading day interval after the pattern is realized
    
+   h = 1;
+   if(forecastWindow > 30)
+       h = 2;
+   end
    
-   patternMatches = zeros(length(patterns)-1,1);
+   patternMatches = zeros(length(patterns)-h,1);
    for i=1:length(patterns)-1 %Don't test whether final prediction matches (not enough data)
        sDate = patterns(i,2);
        sIndex = find(date==sDate);
-       l = polyfit(date(sIndex:sIndex+forecastWindow), price(sIndex:sIndex+forecastWindow),1);
+       l = polyfit(date(sIndex:sIndex+forecastWindow), price(sIndex:sIndex+forecastWindow),1)
+       
        if (patterns(i,4) == 1 && l(1) > 0) || (patterns(i,4) == 0 && l(1) < 0)
            patternMatches(i) = 1;
        end
@@ -65,8 +70,8 @@ function [patterns, momentum,patternMatches] =  analyze(fileName,displayGraphs,f
    %% Plotting
      if(displayGraphs == 1)
         %plotting forecastWindow 
-        plot(movAvg)
         figure(1)
+        plot(movAvg)
         hold on
 
         %momentum
@@ -76,6 +81,7 @@ function [patterns, momentum,patternMatches] =  analyze(fileName,displayGraphs,f
         ylabel('Price ($)')
         legend('Moving Average (180 days)','Best Fit Curve','Location','southeast') 
 
+        hold off
         %regular price data
         figure(2)
         plot(date,price)
@@ -83,15 +89,19 @@ function [patterns, momentum,patternMatches] =  analyze(fileName,displayGraphs,f
 
         %mins and maxes
         plot(maxDate,maxima,'-og')
+%         hold on
         plot(minDate,minima,'-or') 
 
         title(fileName)
         xlabel('Time (days)')
         ylabel('Price ($)')
         
+%         hold on
         %support and resitence
         plot(linesm(:,1),linesm(:,2),'k-','LineWidth',1);
+%         hold on
         plot(linesmi(:,1),linesmi(:,2),'k-','LineWidth',1);
         legend("Price","Resistence","Support","Pattern Bounds")
+        hold off
      end
 end
